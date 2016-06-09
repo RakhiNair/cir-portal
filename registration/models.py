@@ -81,6 +81,7 @@ class StudentManager(models.Manager):
         # do something with the book
         return student
 
+COURSES = (('cse', _('CSE')), ('me', _('ME')), ('ece', _('ECE')), ('eee', _('EEE')))
 
 class Student(models.Model):
     aums_id = models.CharField(_('Aums ID'),  max_length=32, blank=False, unique=True,primary_key = True)
@@ -88,7 +89,7 @@ class Student(models.Model):
     curr_course = models.CharField(_('Current Course'), max_length=32, blank=True, null=True,
                                   validators=[RegexValidator(regex='^[A-Za-z]*$')])
 
-    branch = models.CharField(_('Branch'), max_length=32, blank=True, null=True,
+    branch = models.CharField(_('Branch'), max_length=32, choices= COURSES, blank=True, null=True,
                                   validators=[RegexValidator(regex='^[A-Za-z]*$')])
     tenth_mark = models.FloatField(_('10th Mark'), blank=True, null=True)
     twelth_mark = models.FloatField(_('12th Mark'), blank=True, null=True)
